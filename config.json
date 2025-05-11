@@ -1,18 +1,18 @@
 {
     "project": {
-        "name": "mybgg",
-        "title": ""
+        "name": "CloudyNotes",
+        "title": "CloudyNotes Boargame Collection"
     },
     "boardgamegeek": {
-        "user_name": "YOUR_BGG_USERNAME",
+        "user_name": "merajk",
         "extra_params": {
             "own": 1
         }
     },
     "algolia": {
-        "app_id": "YOUR_APP_ID",
-        "api_key_search_only": "YOUR_PUBLIC_API_KEY",
-        "index_name": "YOUR_INDEX_NAME",
+        "app_id": "SGNHQQK0RZ",
+        "api_key_search_only": "b21ab486f591108c9d7f2ad2d7446fdd",
+        "index_name": "cloudynotes",
         "hits_per_page": 24
     }
 }
