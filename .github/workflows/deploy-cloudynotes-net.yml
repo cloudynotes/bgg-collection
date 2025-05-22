@@ -1,0 +1,38 @@
+name: "Deploy CloudyNotes"
+
+on:
+    workflow_dispatch:
+        branches:
+            - sandbox
+    push:
+        branches:
+            - sandbox
+
+env:
+    AWS_REGION: eu-north-1
+    IAM_ROLE: arn:aws:iam::794038215422:role/github-actions-oidc-role
+    APPROVER: meraj-kashi
+    S3_BUCKET: www.cloudynotes.net
+
+permissions:
+    id-token: write   # This is required for requesting the JWT
+    contents: read    # This is required for actions/checkout
+    issues: write
+
+jobs:
+    build:
+        name: "Publish"
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: ${{ env.IAM_ROLE }}
+                  aws-region: ${{ env.AWS_REGION }}
+            - uses: actions/setup-python@v5
+              with:
+                python-version: '3.13'
+            
+            - run: |
+                aws s3 sync ./front s3://${{ env.S3_BUCKET }}/collection
